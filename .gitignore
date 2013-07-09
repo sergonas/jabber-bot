@@ -8,4 +8,4 @@ target/
 
 # IDEA project files #
 .idea/
-soapemu.iml
+*.iml
