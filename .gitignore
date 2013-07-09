@@ -1,0 +1,11 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+target/
+
+# IDEA project files #
+.idea/
+soapemu.iml
