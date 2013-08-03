@@ -1,7 +1,6 @@
 package ru.sergonas.jabberbot;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -31,11 +30,7 @@ public class ConfigManager {
                 if(!nodes.item(i).hasChildNodes()) continue;
                 vault.put(nodes.item(i).getNodeName(), nodes.item(i).getFirstChild().getTextContent());
             }
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
+        } catch (SAXException | IOException | ParserConfigurationException e) {
             e.printStackTrace();
         }
 
