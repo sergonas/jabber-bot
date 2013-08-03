@@ -6,7 +6,7 @@ package ru.sergonas.jabberbot.plugins;
  * Time: 21:20
  */
 public class HelpCommandHandler implements CommandHandler {
-    private static final String COMMAND_NAME = "echo";
+    private static final String COMMAND_NAME = "help";
 
     @Override
     public String getCommandName() {

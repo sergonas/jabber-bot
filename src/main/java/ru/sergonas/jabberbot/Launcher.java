@@ -14,7 +14,6 @@ import ru.sergonas.jabberbot.plugins.BadHandlerException;
 import ru.sergonas.jabberbot.plugins.CommandHandler;
 
 import java.io.File;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
