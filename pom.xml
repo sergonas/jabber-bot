@@ -38,8 +38,8 @@
                 <archive>
                     <manifest>
                         <addClasspath>true</addClasspath>
-                        <mainClass>ru.sergonas.soapemu.Main</mainClass>
-                        <packageName>ru.sergonas.soapemu</packageName>
+                        <mainClass>ru.sergonas.jabberbot.Launcher</mainClass>
+                        <packageName>ru.sergonas.jabberbot</packageName>
                         <addClasspath>true</addClasspath>
                         <classpathPrefix>lib/</classpathPrefix>
                     </manifest>
@@ -92,6 +92,11 @@
         <groupId>org.reflections</groupId>
         <artifactId>reflections</artifactId>
         <version>0.9.9-RC1</version>
+    </dependency>
+    <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>1.3.173</version>
     </dependency>
 </dependencies>
 </project>

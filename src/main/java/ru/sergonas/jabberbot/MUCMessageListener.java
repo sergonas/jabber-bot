@@ -4,6 +4,8 @@ import org.jivesoftware.smack.*;
 import org.jivesoftware.smack.packet.*;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
+import java.util.Date;
+
 /**
  * No JavaDoc
  * User: serega
@@ -15,11 +17,13 @@ public class MUCMessageListener implements PacketListener {
     private final MessageHandler handler;
     private final String quitCommand = "die";
     private boolean quitTrigger;
+    private Logger logger;
 
     public MUCMessageListener(MultiUserChat multiUserChat, MessageHandler handler) {
         this.MUC = multiUserChat;
         this.handler = handler;
         this.quitTrigger = false;
+        this.logger = new Logger();
     }
 
     @Override
@@ -49,7 +53,7 @@ public class MUCMessageListener implements PacketListener {
     }
 
     private void logMessage(Message msg) {
-        //TODO create logger
+        logger.log(msg.getFrom(), new Date(), msg.getBody());
     }
 
     private void quitChat() {
