@@ -13,6 +13,7 @@ import org.jivesoftware.smackx.muc.MultiUserChat;
 public class MUCMessageListener implements PacketListener {
     private final MultiUserChat MUC;
     private final MessageHandler handler;
+    private final String quitCommand = "die";
     private boolean quitTrigger;
 
     public MUCMessageListener(MultiUserChat multiUserChat, MessageHandler handler) {
@@ -26,7 +27,7 @@ public class MUCMessageListener implements PacketListener {
         if(packet instanceof Message) {
             logMessage((Message) packet);
             String messageBody = ((Message) packet).getBody();
-            if(!messageBody.matches("\\w+\\s+quit\\s+.*")) {
+            if(!messageBody.matches("\\w+\\s+"+quitCommand+"(\\s+.*)*")) {
                 String response = handler.handleMessage((Message) packet);
                 if(response!= null && !"".equals(response) && !" ".equals(response)) {
                     try {
@@ -37,7 +38,7 @@ public class MUCMessageListener implements PacketListener {
                 }
             } else {
                 try {
-                    if(!packet.getFrom().toLowerCase().contains("sergonas@")) return;
+                    if(!packet.getFrom().toLowerCase().contains("sergonas")) return;
                     MUC.sendMessage("Good bye.");
                     quitChat();
                 } catch (XMPPException e) {

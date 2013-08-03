@@ -41,7 +41,7 @@ public class MessageHandler {
         if(args.length <= 1) {
             return "No command.";
         } else if(args.length > 1) {
-            String paramString = Arrays.toString(Arrays.copyOfRange(args, 2, args.length));
+            String paramString = body.replaceAll(BOT_NAME + "\\s+\\w+\\s+", "");
             CommandHandler currentCommandHandler = handlerPool.get(args[1]);
             if(currentCommandHandler != null) {
                 return currentCommandHandler.executeCommand(paramString);
@@ -58,7 +58,7 @@ public class MessageHandler {
         String commandName = handler.getCommandName();
         if(commandName == null) throw new BadHandlerException("Command handler name must not be null");
         if(commandName.contains(" ")) throw new BadHandlerException("Command handler must not contain \"space\" in command name");
-        if("quit".equals(commandName)) throw new BadHandlerException("Command handler name must not equals to \"quit\"");
+        //if(quitCommand.equals(commandName)) throw new BadHandlerException("Command handler name must not equals to \"" + quitCommand + "\"");
         handlerPool.put(handler.getCommandName(), handler);
     }
     private boolean isItForMe(String body) {

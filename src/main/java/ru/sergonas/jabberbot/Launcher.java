@@ -26,7 +26,6 @@ import java.util.Set;
  */
 public class Launcher {
     private static boolean DEBUG = false;
-    public static final String BOT_NAME = "CMYK";
     public static void main(String[] args) throws XMPPException {
         ConfigManager.loadConfig(new File("config.xml"));
         System.out.println();
@@ -40,8 +39,8 @@ public class Launcher {
         MultiUserChat muc = new MultiUserChat(connection, ConfigManager.getParam("room") + "@conference." + ConfigManager.getParam("server"));
         DiscussionHistory dh = new DiscussionHistory();
         dh.setMaxChars(0);
-        muc.join(BOT_NAME, "", dh, 1000);
-        MessageHandler messageHandler = new MessageHandler(BOT_NAME);
+        muc.join(ConfigManager.getParam("botname"), "", dh, 1000);
+        MessageHandler messageHandler = new MessageHandler(ConfigManager.getParam("botname"));
 
         List<ClassLoader> classLoadersList = new LinkedList<ClassLoader>();
         classLoadersList.add(ClasspathHelper.contextClassLoader());

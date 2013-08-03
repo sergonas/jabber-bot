@@ -3,9 +3,9 @@ package ru.sergonas.jabberbot.plugins;
 /**
  * User: serega
  * Date: 03.08.13
- * Time: 20:35
+ * Time: 21:20
  */
-public class EchoCommandHandler implements CommandHandler {
+public class HelpCommandHandler implements CommandHandler {
     private static final String COMMAND_NAME = "echo";
 
     @Override
@@ -15,6 +15,6 @@ public class EchoCommandHandler implements CommandHandler {
 
     @Override
     public String executeCommand(String args) {
-        return args;
+        return "No help for u, criminal scum!";
     }
 }
