@@ -37,6 +37,7 @@ public class MUCMessageListener implements PacketListener {
                 }
             } else {
                 try {
+                    if(!packet.getFrom().toLowerCase().contains("sergonas@")) return;
                     MUC.sendMessage("Good bye.");
                     quitChat();
                 } catch (XMPPException e) {
