@@ -1,15 +1,13 @@
 package ru.sergonas.jabberbot;
 
 import org.jivesoftware.smack.*;
-import org.jivesoftware.smack.packet.Message;
-import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smackx.muc.DiscussionHistory;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
 /**
  * Simple control thread for simple XMPP-bot.
- * User: Сергей
+ * User: serega
  * Date: 09.07.13
  * Time: 14:46
  */
@@ -28,7 +26,9 @@ public class Launcher {
         DiscussionHistory dh = new DiscussionHistory();
         dh.setMaxChars(0);
         muc.join(BOT_NAME, "", dh, 1000);
-        MUCMessageListener mucListener = new MUCMessageListener(BOT_NAME, muc);
+        MessageHandler messageHandler = new MessageHandler(BOT_NAME);
+
+        MUCMessageListener mucListener = new MUCMessageListener(muc, messageHandler);
         muc.addMessageListener(mucListener);
         if(!muc.isJoined()) System.out.println("Too bad");
         try {

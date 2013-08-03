@@ -8,5 +8,11 @@ package ru.sergonas.jabberbot.plugins;
  */
 public interface CommandHandler {
     public String getCommandName();
-    public void executeCommand(String args);
+
+    /**
+     *
+     * @param args argumets to command
+     * @return response of command
+     */
+    public String executeCommand(String args);
 }
