@@ -15,12 +15,11 @@ import java.util.HashMap;
 public class MessageHandler {
     private final HashMap<String, CommandHandler> handlerPool;
     private final String BOT_NAME;
-    private boolean quitTrigger;
+
 
     public MessageHandler(String botName) {
         this.BOT_NAME = botName;
         handlerPool = new HashMap<>();
-        quitTrigger = false;
     }
 
     public String handleMessage(Message msg) {
@@ -42,10 +41,6 @@ public class MessageHandler {
         if(args.length <= 1) {
             return "No command.";
         } else if(args.length > 1) {
-            if("quit".equals(args[1])) {
-                quitTrigger = true;
-                return "Good bye.";
-            }
             String paramString = Arrays.toString(Arrays.copyOfRange(args, 2, args.length));
             CommandHandler currentCommandHandler = handlerPool.get(args[1]);
             if(currentCommandHandler != null) {
@@ -56,14 +51,6 @@ public class MessageHandler {
         } else {
             return null;
         }
-    }
-
-    public boolean isQuit() {
-        return quitTrigger;
-    }
-
-    public void reset() {
-        quitTrigger = false;
     }
 
     public void addCommandHandler(CommandHandler handler) throws BadHandlerException {

@@ -19,22 +19,11 @@ public class MessageHandlerTest {
     }
 
     @Test
-    public void quitTest() {
-        Message msg = new Message();
-        msg.setBody(BOT_NAME + " quit");
-        String response = messageHandler.handleMessage(msg);
-        assertTrue("Good bye.".equals(response));
-        assertTrue(messageHandler.isQuit());
-        messageHandler.reset();
-    }
-
-    @Test
     public void badCommandTest() {
         Message msg = new Message();
         msg.setBody(BOT_NAME + " asdqwe");
         String response = messageHandler.handleMessage(msg);
         assertTrue("No such command.".equals(response));
-        assertFalse(messageHandler.isQuit());
     }
 
     @Test
@@ -43,6 +32,5 @@ public class MessageHandlerTest {
         msg.setBody(BOT_NAME + " ");
         String response = messageHandler.handleMessage(msg);
         assertTrue("No command.".equals(response));
-        assertFalse(messageHandler.isQuit());
     }
 }

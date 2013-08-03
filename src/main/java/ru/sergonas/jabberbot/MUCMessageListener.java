@@ -13,26 +13,36 @@ import org.jivesoftware.smackx.muc.MultiUserChat;
 public class MUCMessageListener implements PacketListener {
     private final MultiUserChat MUC;
     private final MessageHandler handler;
-
+    private boolean quitTrigger;
 
     public MUCMessageListener(MultiUserChat multiUserChat, MessageHandler handler) {
         this.MUC = multiUserChat;
         this.handler = handler;
+        this.quitTrigger = false;
     }
 
     @Override
     public void processPacket(Packet packet) {
         if(packet instanceof Message) {
             logMessage((Message) packet);
-            String response = handler.handleMessage((Message) packet);
-            if(response!= null && !"".equals(response) && !" ".equals(response)) {
+            String messageBody = ((Message) packet).getBody();
+            if(!messageBody.matches("\\w+\\s+quit\\s+.*")) {
+                String response = handler.handleMessage((Message) packet);
+                if(response!= null && !"".equals(response) && !" ".equals(response)) {
+                    try {
+                        MUC.sendMessage(response);
+                    } catch (XMPPException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
                 try {
-                    MUC.sendMessage(response);
+                    MUC.sendMessage("Good bye.");
+                    quitChat();
                 } catch (XMPPException e) {
                     e.printStackTrace();
                 }
             }
-            if(handler.isQuit()) quitChat();
         }
     }
 
@@ -42,13 +52,14 @@ public class MUCMessageListener implements PacketListener {
 
     private void quitChat() {
         synchronized (MUC) {
+            quitTrigger = true;
             MUC.leave();
             MUC.notifyAll();
         }
     }
 
     public boolean isQuit() {
-        return handler.isQuit();
+        return quitTrigger;
     }
 
 
