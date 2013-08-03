@@ -4,7 +4,6 @@ import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 import ru.sergonas.jabberbot.plugins.BadHandlerException;
 import ru.sergonas.jabberbot.plugins.CommandHandler;
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**

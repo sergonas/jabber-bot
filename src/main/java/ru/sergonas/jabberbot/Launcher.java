@@ -25,24 +25,23 @@ import java.util.Set;
  * Time: 14:46
  */
 public class Launcher {
-    private static boolean DEBUG = false;
     public static void main(String[] args) throws XMPPException {
         ConfigManager.loadConfig(new File("config.xml"));
         System.out.println();
 
-        Connection.DEBUG_ENABLED = DEBUG;
+        Connection.DEBUG_ENABLED = false;
         Connection connection = new XMPPConnection(ConfigManager.getParam("server"));
         connection.connect();
         connection.login(ConfigManager.getParam("account"), ConfigManager.getParam("password"));
         Presence presence = new Presence(Presence.Type.available);
         connection.sendPacket(presence);
-        MultiUserChat muc = new MultiUserChat(connection, ConfigManager.getParam("room") + "@conference." + ConfigManager.getParam("server"));
+        final MultiUserChat muc = new MultiUserChat(connection, ConfigManager.getParam("room") + "@conference." + ConfigManager.getParam("server"));
         DiscussionHistory dh = new DiscussionHistory();
         dh.setMaxChars(0);
         muc.join(ConfigManager.getParam("botname"), "", dh, 1000);
         MessageHandler messageHandler = new MessageHandler(ConfigManager.getParam("botname"));
 
-        List<ClassLoader> classLoadersList = new LinkedList<ClassLoader>();
+        List<ClassLoader> classLoadersList = new LinkedList<>();
         classLoadersList.add(ClasspathHelper.contextClassLoader());
         classLoadersList.add(ClasspathHelper.staticClassLoader());
 
@@ -58,11 +57,7 @@ public class Launcher {
             try {
                 CommandHandler inst = handl.newInstance();
                 messageHandler.addCommandHandler(inst);
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (BadHandlerException e) {
+            } catch (InstantiationException | IllegalAccessException | BadHandlerException e) {
                 e.printStackTrace();
             }
         }
