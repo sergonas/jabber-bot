@@ -10,7 +10,7 @@ public interface CommandHandler {
     public String getCommandName();
 
     /**
-     *
+     * Функция принимает только аргументы команды, без названия команды и прочего мусора.
      * @param args argumets to command
      * @return response of command
      */
