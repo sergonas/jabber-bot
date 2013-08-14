@@ -3,11 +3,7 @@ package ru.sergonas.jabberbot;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 import ru.sergonas.jabberbot.orm.LogEntry;
-
-import java.sql.*;
-import java.util.Date;
 
 /**
  * User: serega
@@ -17,7 +13,7 @@ import java.util.Date;
 public class Logger{
     private SessionFactory sessionFactory;
     public Logger() {
-        sessionFactory = new Configuration().configure().buildSessionFactory();
+        sessionFactory = SessionFactorySingl.getInstance();
     }
 
     public void log(LogEntry logEntry) {

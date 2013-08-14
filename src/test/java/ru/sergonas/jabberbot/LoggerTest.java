@@ -35,10 +35,11 @@ public class LoggerTest {
         SessionFactory sessionFactory =  new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List result = session.createQuery( "from LogEntry" ).list();
+        List result = session.createQuery( "from LogEntry le where le.name = :who" ).setString("who", "me").list();
         for ( LogEntry entry : (List<LogEntry>) result ) {
             System.out.printf("%s <%s>: %s%n", formatter.format(entry.getTime()), entry.getName(), entry.getMessage());
         }
+        session.flush();
         session.getTransaction().commit();
         session.close();
     }

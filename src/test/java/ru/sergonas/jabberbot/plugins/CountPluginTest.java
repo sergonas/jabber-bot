@@ -18,7 +18,8 @@ public class CountPluginTest {
         assertTrue("count".equals(comName));
 
         //Должно считать количество вхождений mock в базе
-        String resp = cch.executeCommand("\"mock\"");
+        String resp = cch.executeCommand("\"fuck\"");
+        System.out.println(resp);
         assertNotNull(resp);
         assertTrue(Pattern.matches("Count of \"[^\"]+\" is \\d+", resp ));
     }
