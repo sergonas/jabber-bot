@@ -3,6 +3,7 @@ package ru.sergonas.jabberbot;
 import org.jivesoftware.smack.*;
 import org.jivesoftware.smack.packet.*;
 import org.jivesoftware.smackx.muc.MultiUserChat;
+import ru.sergonas.jabberbot.orm.LogEntry;
 
 import java.util.Date;
 
@@ -53,7 +54,7 @@ public class MUCMessageListener implements PacketListener {
     }
 
     private void logMessage(Message msg) {
-        logger.log(msg.getFrom(), new Date(), msg.getBody());
+        logger.log(new LogEntry(new Date(), msg.getFrom(), msg.getBody()));
     }
 
     private void quitChat() {

@@ -1,5 +1,11 @@
 package ru.sergonas.jabberbot;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import ru.sergonas.jabberbot.orm.LogEntry;
+
 import java.sql.*;
 import java.util.Date;
 
@@ -9,27 +15,16 @@ import java.util.Date;
  * Time: 23:38
  */
 public class Logger{
-    private Connection conn;
+    private SessionFactory sessionFactory;
     public Logger() {
-        try {
-            Class.forName("org.h2.Driver");
-            conn = DriverManager.getConnection("jdbc:h2:log");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        sessionFactory = new Configuration().configure().buildSessionFactory();
     }
 
-    public void log(String user, Date time, String msg) {
-        PreparedStatement pstmt;
-        try {
-            pstmt = conn.prepareStatement("INSERT INTO LOGS(TIME, USER, MESSAGE) VALUES (?,?,?);");
-            pstmt.setTimestamp(1, new Timestamp(time.getTime()));
-            pstmt.setString(2, user);
-            pstmt.setString(3, msg);
-            pstmt.executeUpdate();
-            pstmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void log(LogEntry logEntry) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.save(logEntry);
+        session.getTransaction().commit();
+        session.close();
     }
 }
