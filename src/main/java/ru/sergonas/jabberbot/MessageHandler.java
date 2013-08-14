@@ -5,6 +5,7 @@ import org.jivesoftware.smack.packet.Message;
 import ru.sergonas.jabberbot.plugins.BadHandlerException;
 import ru.sergonas.jabberbot.plugins.CommandHandler;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 /**
  * User: serega
@@ -61,7 +62,6 @@ public class MessageHandler {
         handlerPool.put(handler.getCommandName(), handler);
     }
     private boolean isItForMe(String body) {
-        //TODO implement ignoring spaces
-        return body.startsWith(BOT_NAME);
+        return Pattern.matches("^\\s*"+BOT_NAME+"\\s+.*$",body);
     }
 }
