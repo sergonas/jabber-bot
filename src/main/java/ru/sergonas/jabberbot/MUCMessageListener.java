@@ -4,6 +4,7 @@ import org.jivesoftware.smack.*;
 import org.jivesoftware.smack.packet.*;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 import ru.sergonas.jabberbot.orm.LogEntry;
+import ru.sergonas.jabberbot.plugins.IChat;
 
 import java.util.Date;
 
@@ -13,7 +14,7 @@ import java.util.Date;
  * Date: 03.08.13
  * Time: 17:12
  */
-public class MUCMessageListener implements PacketListener {
+public class MUCMessageListener implements PacketListener, IChat {
     private final MultiUserChat MUC;
     private final MessageHandler handler;
     private final String quitCommand = "die";
@@ -57,7 +58,8 @@ public class MUCMessageListener implements PacketListener {
         logger.log(new LogEntry(new Date(), msg.getFrom(), msg.getBody()));
     }
 
-    private void quitChat() {
+    @Override
+    public void quitChat() {
         synchronized (MUC) {
             quitTrigger = true;
             MUC.leave();

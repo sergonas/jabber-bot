@@ -12,6 +12,7 @@ import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
 import ru.sergonas.jabberbot.plugins.BadHandlerException;
 import ru.sergonas.jabberbot.plugins.CommandHandler;
+import ru.sergonas.jabberbot.plugins.IChat;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -25,8 +26,9 @@ import java.util.Set;
  * Time: 14:46
  */
 public class Launcher {
+    public static IChat iChat;
     public static void main(String[] args) throws XMPPException {
-        ConfigManager.loadConfig(new File("config.xml"));
+        ConfigManager.loadConfig(new File("botconfig.xml"));
         System.out.println();
 
         Connection.DEBUG_ENABLED = false;
@@ -63,6 +65,7 @@ public class Launcher {
         }
 
         MUCMessageListener mucListener = new MUCMessageListener(muc, messageHandler);
+        iChat = mucListener;
         muc.addMessageListener(mucListener);
         if(!muc.isJoined()) System.out.println("Too bad");
         try {
