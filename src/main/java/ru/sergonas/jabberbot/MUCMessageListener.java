@@ -30,26 +30,26 @@ public class MUCMessageListener implements PacketListener, IChat {
 
     @Override
     public void processPacket(Packet packet) {
-        if(packet instanceof Message) {
-            logMessage((Message) packet);
-            String messageBody = ((Message) packet).getBody();
-            if(!messageBody.matches("\\w+\\s+"+quitCommand+"(\\s+.*)*")) {
-                String response = handler.handleMessage((Message) packet);
-                if(response!= null && !"".equals(response) && !" ".equals(response)) {
-                    try {
-                        MUC.sendMessage(response);
-                    } catch (XMPPException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } else {
+        if(!(packet instanceof Message)) return;
+
+        logMessage((Message) packet);
+        String messageBody = ((Message) packet).getBody();
+        if(!messageBody.matches("\\w+\\s+"+quitCommand+"(\\s+.*)*")) {
+            String response = handler.handleMessage((Message) packet);
+            if(response!= null && !"".equals(response) && !" ".equals(response)) {
                 try {
-                    if(!packet.getFrom().toLowerCase().contains("sergonas")) return;
-                    MUC.sendMessage("Good bye.");
-                    quitChat();
+                    MUC.sendMessage(response);
                 } catch (XMPPException e) {
                     e.printStackTrace();
                 }
+            }
+        } else {
+            try {
+                if(!packet.getFrom().toLowerCase().contains("sergonas")) return;
+                MUC.sendMessage("Good bye.");
+                quitChat();
+            } catch (XMPPException e) {
+                e.printStackTrace();
             }
         }
     }

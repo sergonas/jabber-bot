@@ -12,6 +12,7 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.ExecutionContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
+import ru.sergonas.jabberbot.Launcher;
 import java.io.IOException;
 
 /**
@@ -34,6 +35,7 @@ public class RebuildCommandHandler implements CommandHandler {
         String response;
         try {
             sendBuildSignal();
+            Launcher.iChat.quitChat();
             response = "Rebuild started. Shutting down.";
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,7 +52,7 @@ public class RebuildCommandHandler implements CommandHandler {
         BasicHttpContext context = new BasicHttpContext();
         context.setAttribute("preemptive-auth", basicAuth);
         client.addRequestInterceptor(new PreemptiveAuth(), 0);
-        String getUrl = ConfigManager.getParam("jenkinsServer") + "jenkins" + "/job/" + ConfigManager.getParam("jenkinsJobName") + "/build?token=" + ConfigManager.getParam("jenkinsBuildToken");
+        String getUrl = ConfigManager.getParam("jenkinsServer") + "jenkins/job/" + ConfigManager.getParam("jenkinsJobName") + "/build?token=" + ConfigManager.getParam("jenkinsBuildToken");
         HttpGet get = new HttpGet(getUrl);
         try {
             HttpResponse response = client.execute(get, context);
