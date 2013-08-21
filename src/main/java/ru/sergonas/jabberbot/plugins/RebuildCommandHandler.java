@@ -35,7 +35,7 @@ public class RebuildCommandHandler implements CommandHandler {
         String response;
         try {
             sendBuildSignal();
-            Launcher.iChat.quitChat();
+            //TODO Shutdown bot here
             response = "Rebuild started. Shutting down.";
         } catch (Exception e) {
             e.printStackTrace();

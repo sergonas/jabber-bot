@@ -17,7 +17,7 @@ public class SessionFactorySingl {
     public static SessionFactory getInstance() {
         SessionFactory localInstance = instance;
         if (localInstance == null) {
-            synchronized (SessionFactory.class) {
+            synchronized (SessionFactorySingl.class) {
                 localInstance = instance;
                 if (localInstance == null) {
                     Configuration configuration = new Configuration();

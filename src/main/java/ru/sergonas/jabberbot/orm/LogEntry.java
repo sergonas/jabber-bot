@@ -11,6 +11,7 @@ import java.util.Date;
  * Time: 10:37
  */
 
+@SuppressWarnings("UnusedDeclaration")
 @Entity
 @Table (name = "Logs")
 public class LogEntry {

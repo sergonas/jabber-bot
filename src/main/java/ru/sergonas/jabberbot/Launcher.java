@@ -11,11 +11,10 @@ import java.io.File;
  */
 public class Launcher {
     private static final String pathToConfigFile = "botconfig.xml";
-    private static XMPPBot bot;
+    private static final XMPPBot bot = new XMPPBot(ConfManager.get("server"), ConfManager.get("botname"));
+
     public static void main(String[] args) throws XMPPException {
         ConfManager.loadConfig(new File(pathToConfigFile));
-        bot = new XMPPBot(ConfManager.get("server"), ConfManager.get("botname"));
-
         //TODO load all rooms from config
         bot.addRoomToWorkWith(ConfManager.get("room") + "@conference." + ConfManager.get("server"));
         try {

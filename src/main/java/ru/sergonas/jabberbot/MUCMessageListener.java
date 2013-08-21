@@ -11,6 +11,8 @@ import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
 import ru.sergonas.jabberbot.plugins.BadHandlerException;
 import ru.sergonas.jabberbot.plugins.CommandHandler;
+import ru.sergonas.jabberbot.plugins.PluginContainer;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -33,19 +35,8 @@ public class MUCMessageListener implements PacketListener {
 
     private MessageHandler getHandler() {
         MessageHandler handler = new MessageHandler();
-        List<ClassLoader> classLoadersList = new LinkedList<>();
-        classLoadersList.add(ClasspathHelper.contextClassLoader());
-        classLoadersList.add(ClasspathHelper.staticClassLoader());
 
-        Reflections reflections = new Reflections(new ConfigurationBuilder()
-                .setScanners(new SubTypesScanner(true), new ResourcesScanner())
-                .setUrls(ClasspathHelper.forClassLoader(classLoadersList.toArray(new ClassLoader[0])))
-                .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix("ru.sergonas.jabberbot.plugins"))));
-
-        Set<Class<? extends CommandHandler>> allPlugins =
-                reflections.getSubTypesOf(CommandHandler.class);
-
-        for(Class<? extends CommandHandler> plugin : allPlugins) {
+        for(Class<? extends CommandHandler> plugin : PluginContainer.getInstance()) {
             try {
                 CommandHandler inst = plugin.newInstance();
                 handler.addCommandHandler(inst);
