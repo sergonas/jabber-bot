@@ -1,4 +1,4 @@
-package ru.sergonas.jabberbot;
+package ru.sergonas.jabberbot.bot;
 
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
  * Time: 19:11
  */
 public class MessageHandler {
+    //TODO this class need huge rework.
     private final HashMap<String, CommandHandler> handlerPool;
 
 

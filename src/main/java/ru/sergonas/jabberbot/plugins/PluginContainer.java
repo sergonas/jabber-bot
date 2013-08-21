@@ -6,7 +6,6 @@ import org.reflections.scanners.SubTypesScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;

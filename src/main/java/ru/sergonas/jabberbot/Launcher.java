@@ -1,6 +1,8 @@
 package ru.sergonas.jabberbot;
 
 import org.jivesoftware.smack.*;
+import ru.sergonas.jabberbot.bot.XMPPBot;
+
 import java.io.File;
 
 /**

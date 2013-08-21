@@ -1,21 +1,11 @@
-package ru.sergonas.jabberbot;
+package ru.sergonas.jabberbot.bot;
 
 import org.jivesoftware.smack.*;
 import org.jivesoftware.smack.packet.*;
 import org.jivesoftware.smackx.muc.MultiUserChat;
-import org.reflections.Reflections;
-import org.reflections.scanners.ResourcesScanner;
-import org.reflections.scanners.SubTypesScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
-import org.reflections.util.FilterBuilder;
 import ru.sergonas.jabberbot.plugins.BadHandlerException;
 import ru.sergonas.jabberbot.plugins.CommandHandler;
 import ru.sergonas.jabberbot.plugins.PluginContainer;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
 
 /**
  * User: serega

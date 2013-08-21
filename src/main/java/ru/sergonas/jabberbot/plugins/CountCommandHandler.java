@@ -3,7 +3,7 @@ package ru.sergonas.jabberbot.plugins;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import ru.sergonas.jabberbot.SessionFactorySingl;
+import ru.sergonas.jabberbot.orm.SessionFactorySingl;
 import ru.sergonas.jabberbot.orm.LogEntry;
 
 import java.util.regex.Pattern;

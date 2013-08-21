@@ -1,4 +1,4 @@
-package ru.sergonas.jabberbot;
+package ru.sergonas.jabberbot.bot;
 
 /**
  * United control panel for bot commands

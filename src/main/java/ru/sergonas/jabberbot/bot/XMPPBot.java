@@ -1,4 +1,4 @@
-package ru.sergonas.jabberbot;
+package ru.sergonas.jabberbot.bot;
 
 import org.jivesoftware.smack.Connection;
 import org.jivesoftware.smack.XMPPConnection;
@@ -8,7 +8,6 @@ import org.jivesoftware.smackx.muc.DiscussionHistory;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 
 /**
  * User: serega

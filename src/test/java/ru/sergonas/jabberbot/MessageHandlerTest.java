@@ -3,6 +3,8 @@ package ru.sergonas.jabberbot;
 import org.jivesoftware.smack.packet.Message;
 import org.junit.Before;
 import org.junit.Test;
+import ru.sergonas.jabberbot.bot.MessageHandler;
+
 import static org.junit.Assert.*;
 
 /**
@@ -15,7 +17,7 @@ public class MessageHandlerTest {
     private final String BOT_NAME = "CMYK";
     @Before
     public void init() {
-        messageHandler = new MessageHandler(BOT_NAME);
+        messageHandler = new MessageHandler();
     }
 
     @Test
