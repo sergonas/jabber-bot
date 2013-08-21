@@ -10,4 +10,4 @@ target/
 # IDEA project files #
 .idea/
 *.iml
-log.h2.dbs
+log.h2.db
