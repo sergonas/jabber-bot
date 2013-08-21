@@ -6,6 +6,7 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
 /**
+ * Singleton session factory for sharing one connection to DB
  * User: Сергей
  * Date: 14.08.13
  * Time: 14:18

@@ -1,6 +1,6 @@
 package ru.sergonas.jabberbot.plugins;
 
-import ru.sergonas.jabberbot.ConfigManager;
+import ru.sergonas.jabberbot.ConfManager;
 import org.apache.http.*;
 import org.apache.http.auth.*;
 import org.apache.http.client.CredentialsProvider;
@@ -47,12 +47,12 @@ public class RebuildCommandHandler implements CommandHandler {
     private void sendBuildSignal() throws IOException {
         DefaultHttpClient client = new DefaultHttpClient();
         client.getCredentialsProvider().setCredentials(new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT),
-                new UsernamePasswordCredentials(ConfigManager.getParam("jenkinsUser"), ConfigManager.getParam("jenkinsApiToken")));
+                new UsernamePasswordCredentials(ConfManager.get("jenkinsUser"), ConfManager.get("jenkinsApiToken")));
         BasicScheme basicAuth = new BasicScheme();
         BasicHttpContext context = new BasicHttpContext();
         context.setAttribute("preemptive-auth", basicAuth);
         client.addRequestInterceptor(new PreemptiveAuth(), 0);
-        String getUrl = ConfigManager.getParam("jenkinsServer") + "jenkins/job/" + ConfigManager.getParam("jenkinsJobName") + "/build?token=" + ConfigManager.getParam("jenkinsBuildToken");
+        String getUrl = ConfManager.get("jenkinsServer") + "jenkins/job/" + ConfManager.get("jenkinsJobName") + "/build?token=" + ConfManager.get("jenkinsBuildToken");
         HttpGet get = new HttpGet(getUrl);
         try {
             HttpResponse response = client.execute(get, context);

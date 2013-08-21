@@ -16,8 +16,8 @@ import java.util.HashMap;
  * Date: 03.08.13
  * Time: 19:08
  */
-public class ConfigManager {
-    private static HashMap<String, String> vault = new HashMap<>();
+public class ConfManager {
+    private static final HashMap<String, String> vault = new HashMap<>();
 
     public static void loadConfig(File pathToConfig) {
         try {
@@ -33,10 +33,9 @@ public class ConfigManager {
         } catch (SAXException | IOException | ParserConfigurationException e) {
             e.printStackTrace();
         }
-
     }
 
-    public static String getParam(String key) {
+    public static String get(String key) {
         return vault.get(key);
     }
 }
